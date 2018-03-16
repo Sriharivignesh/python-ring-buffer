@@ -32,7 +32,7 @@ class RingBuffer(object):
         '''
         if(self.is_empty()):
             raise RuntimeError('Buffer is empty!')
-       
+
         element = self.buffer[self.tail]
 
         self.tail = (self.tail + 1) % self.max_size
@@ -79,4 +79,3 @@ class RingBuffer(object):
         self.tail = 0
         self.full = False
         self.empty = True
-    
