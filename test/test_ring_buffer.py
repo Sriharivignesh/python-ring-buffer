@@ -103,5 +103,35 @@ class TestRingBuffer(unittest.TestCase):
         fill_size = buffer.get_buffer_fill()
         self.assertEqual(fill_size, random_size)
 
+    def test_get_capacity(self):
+        '''
+        Test that get_capacity method
+        returns correct values
+        '''
+        random_size = random.randrange(1, 100)
+        buffer = RingBuffer(random_size)
+        for i in range(0, random.randrange(1, random_size)):
+            buffer.push(i)
+
+        buffer_capacity = buffer.get_capacity()
+        self.assertEqual(buffer_capacity, random_size)
+
+    def test_clear(self):
+        '''
+        Test that clear() method clears
+        the buffer properly
+        '''
+
+        random_size = random.randrange(1, 100)
+        buffer = RingBuffer(random_size)
+        for i in range(0, random.randrange(1, random_size)):
+            buffer.push(i)
+
+        buffer.clear()
+        self.assertTrue(buffer.is_empty())
+        self.assertFalse(buffer.is_full())
+        self.assertEqual(buffer.get_capacity(), random_size)
+        self.assertEqual(buffer.get_buffer_fill(), 0)
+
 if __name__ == '__main__':
     unittest.main()
