@@ -47,11 +47,13 @@ class TestRingBuffer(unittest.TestCase):
         buffer raises Runtime Exception
         and the "buffer full" message
         '''
-        with pytest.raises(RuntimeError, message='Buffer is full!'):
+        with pytest.raises(RuntimeError) as excinfo:
             random_size = random.randrange(1, 100)
             buffer = RingBuffer(random_size)
             for i in xrange(0, random_size + 1):
                 buffer.push(i)
+        
+        self.assertEqual(str(excinfo.value), 'Buffer is full!')
 
     def test_pop_empty_fail(self):
         '''
@@ -59,10 +61,11 @@ class TestRingBuffer(unittest.TestCase):
         results in RuntimeException being raised
         along with "Buffer empty" exception message
         '''
-        with pytest.raises(RuntimeError, message='Buffer is empty!'):
+        with pytest.raises(RuntimeError) as excinfo:
             random_size = random.randrange(1, 100)
             buffer = RingBuffer(random_size)
             buffer.pop()
 
+        self.assertEqual(str(excinfo.value), 'Buffer is empty!')
 if __name__ == '__main__':
     unittest.main()
