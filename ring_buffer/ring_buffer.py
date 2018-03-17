@@ -65,7 +65,10 @@ class RingBuffer(object):
         '''
         Return current buffer occupied size
         '''
-        if self.head >= self.tail:
+        if self.head == self.tail:
+            return 0 if self.is_empty() else self.max_size
+
+        if self.head > self.tail:
             return self.head - self.tail
 
         return ((self.max_size - self.tail) + (self.head - 0))
@@ -79,3 +82,4 @@ class RingBuffer(object):
         self.tail = 0
         self.full = False
         self.empty = True
+
