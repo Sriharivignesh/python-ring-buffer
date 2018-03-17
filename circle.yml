@@ -19,7 +19,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-{{ checksum "test_requirements.txt" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -28,6 +28,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
+            echo $( pwd )
             pip install -r test_requirements.txt
 
       - save_cache:
@@ -44,6 +45,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
+            pip install -r test_requirements.txt
             pytest --cache-clear --durations=0 --color=yes 
 
       - store_artifacts:
