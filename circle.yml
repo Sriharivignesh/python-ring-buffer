@@ -6,10 +6,10 @@ jobs:
     
       working_directory: ~/repo
 
-      steps:
-        - run:
-            name: update
-            command: apt update && apt upgrade -y && apt install -y python3
+    steps:
+      - run:
+          name: update
+          command: apt update && apt upgrade -y && apt install -y python3
   build:
     docker:
       # specify the version you desire here
