@@ -9,8 +9,8 @@ class TestRingBuffer(unittest.TestCase):
     
     def test_initialize_params(self):
         '''
-        Test that buffer capacity is correctly 
-        returned along with other init params
+        Test that buffer init params are returned
+        correctly
         '''
         random_size = random.randrange(1, 100)
         buffer = RingBuffer(random_size)
@@ -59,13 +59,10 @@ class TestRingBuffer(unittest.TestCase):
         results in RuntimeException being raised
         along with "Buffer empty" exception message
         '''
-        with pytest.raises(RuntimeError, message='Buffer is full!'):
+        with pytest.raises(RuntimeError, message='Buffer is empty!'):
             random_size = random.randrange(1, 100)
             buffer = RingBuffer(random_size)
             buffer.pop()
-
-
-    
 
 if __name__ == '__main__':
     unittest.main()
