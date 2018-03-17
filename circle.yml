@@ -1,20 +1,10 @@
 version: 2
 jobs:
-  test:
-    docker:
-      - image: ubuntu:latest
-    
-      working_directory: ~/repo
-
-    steps:
-      - run:
-          name: update
-          command: apt update && apt upgrade -y && apt install -y python3
   build:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:2.7-stretch-node-browsers
+      - image: ubuntu:latest
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -43,6 +33,10 @@ jobs:
       # other common Python testing frameworks include pytest and nose
       # https://pytest.org
       # https://nose.readthedocs.io
+      - run:
+          name: install-python
+          command: apt update && apt upgrade -y && apt install -y python-pip
+
       - run:
           name: run tests
           command: |
