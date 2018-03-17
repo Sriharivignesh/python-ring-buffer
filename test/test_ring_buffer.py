@@ -67,5 +67,41 @@ class TestRingBuffer(unittest.TestCase):
             buffer.pop()
 
         self.assertEqual(str(excinfo.value), 'Buffer is empty!')
+
+    def test_buffer_fill_size_return(self):
+        '''
+        Test that buffer fill size is 
+        correctly returned under various
+        use scenarios
+        '''
+
+        # Test that buffer fill size is returned as
+        # 0 when buffer is empty
+        random_size = random.randrange(1, 100)
+        buffer = RingBuffer(random_size)
+        fill_size = buffer.get_buffer_fill()
+        self.assertEqual(fill_size, 0)
+
+        # Test that buffer fill size is returned as
+        # the number of elements pushed when the
+        # buffer is neither empty nor full
+        random_size = random.randrange(1, 100)
+        buffer = RingBuffer(random_size)
+        for i in range(0, int(random_size/2)):
+            buffer.push(i)
+
+        fill_size = buffer.get_buffer_fill()
+        self.assertEqual(fill_size, int(random_size/2))
+
+        # Test that buffer fill size is correctly 
+        # returned when buffer is full
+        random_size = random.randrange(1, 100)
+        buffer = RingBuffer(random_size)
+        for i in range(0, random_size):
+            buffer.push(i)
+
+        fill_size = buffer.get_buffer_fill()
+        self.assertEqual(fill_size, random_size)
+
 if __name__ == '__main__':
     unittest.main()
