@@ -5,8 +5,9 @@ import pytest
 
 from ring_buffer.ring_buffer import RingBuffer
 
+
 class TestRingBuffer(unittest.TestCase):
-    
+
     def test_initialize_params(self):
         '''
         Test that buffer init params are returned
@@ -52,7 +53,7 @@ class TestRingBuffer(unittest.TestCase):
             buffer = RingBuffer(random_size)
             for i in range(0, random_size + 1):
                 buffer.push(i)
-        
+
         self.assertEqual(str(excinfo.value), 'Buffer is full!')
 
     def test_pop_empty_fail(self):
@@ -70,7 +71,7 @@ class TestRingBuffer(unittest.TestCase):
 
     def test_buffer_fill_size_return(self):
         '''
-        Test that buffer fill size is 
+        Test that buffer fill size is
         correctly returned under various
         use scenarios
         '''
@@ -93,7 +94,7 @@ class TestRingBuffer(unittest.TestCase):
         fill_size = buffer.get_buffer_fill()
         self.assertEqual(fill_size, int(random_size/2))
 
-        # Test that buffer fill size is correctly 
+        # Test that buffer fill size is correctly
         # returned when buffer is full
         random_size = random.randrange(1, 100)
         buffer = RingBuffer(random_size)
@@ -132,6 +133,7 @@ class TestRingBuffer(unittest.TestCase):
         self.assertFalse(buffer.is_full())
         self.assertEqual(buffer.get_capacity(), random_size)
         self.assertEqual(buffer.get_buffer_fill(), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -82,4 +82,3 @@ class RingBuffer(object):
         self.tail = 0
         self.full = False
         self.empty = True
-
