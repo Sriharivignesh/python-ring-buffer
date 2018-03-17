@@ -35,7 +35,10 @@ jobs:
       # https://nose.readthedocs.io
       - run:
           name: install-python
-          command: apt update && apt upgrade -y && apt install -y python-pip
+          command: |
+            apt update && apt upgrade -y && apt install -y python-pip
+            pip install -U pip
+            pip install virtualenv
 
       - run:
           name: run tests
