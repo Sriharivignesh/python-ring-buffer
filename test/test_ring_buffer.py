@@ -1,6 +1,8 @@
 import unittest
 import random
 
+import pytest
+
 from ring_buffer import RingBuffer
 
 class TestRingBuffer(unittest.TestCase):
@@ -38,6 +40,32 @@ class TestRingBuffer(unittest.TestCase):
         returned_element = buffer.pop()
 
         self.assertEqual(returned_element, 0)
+
+    def test_push_full_fail(self):
+        '''
+        Test that pushing into a full
+        buffer raises Runtime Exception
+        and the "buffer full" message
+        '''
+        with pytest.raises(RuntimeError, message='Buffer is full!'):
+            random_size = random.randrange(1, 100)
+            buffer = RingBuffer(random_size)
+            for i in xrange(0, random_size + 1):
+                buffer.push(i)
+
+    def test_pop_empty_fail(self):
+        '''
+        Test that popping from an empty buffer
+        results in RuntimeException being raised
+        along with "Buffer empty" exception message
+        '''
+        with pytest.raises(RuntimeError, message='Buffer is full!'):
+            random_size = random.randrange(1, 100)
+            buffer = RingBuffer(random_size)
+            buffer.pop()
+
+
+    
 
 if __name__ == '__main__':
     unittest.main()
