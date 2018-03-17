@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-from ring_buffer import RingBuffer
+from ring_buffer.ring_buffer import RingBuffer
 
 class TestRingBuffer(unittest.TestCase):
     
@@ -50,7 +50,7 @@ class TestRingBuffer(unittest.TestCase):
         with pytest.raises(RuntimeError) as excinfo:
             random_size = random.randrange(1, 100)
             buffer = RingBuffer(random_size)
-            for i in xrange(0, random_size + 1):
+            for i in range(0, random_size + 1):
                 buffer.push(i)
         
         self.assertEqual(str(excinfo.value), 'Buffer is full!')

@@ -8,7 +8,7 @@ class RingBuffer(object):
         self.head = 0
         self.tail = 0
         self.max_size = size
-        self.buffer = [0 for i in xrange(0, size)]
+        self.buffer = [0 for i in range(0, size)]
         self.full = False
         self.empty = True
 
@@ -74,7 +74,7 @@ class RingBuffer(object):
         '''
         Clear the buffer
         '''
-        self.buffer = [0 for i in xrange(0, self.max_size)]
+        self.buffer = [0 for i in range(0, self.max_size)]
         self.head = 0
         self.tail = 0
         self.full = False
